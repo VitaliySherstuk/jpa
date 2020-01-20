@@ -27,7 +27,6 @@ public class Unit implements Serializable {
     private List<Employee> employeeList = new ArrayList<>();
 
     public Unit() {
-        //constructor
     }
 
     public long getUnitId() {

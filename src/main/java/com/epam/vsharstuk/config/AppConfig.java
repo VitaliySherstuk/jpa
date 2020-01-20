@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -31,11 +32,6 @@ public class AppConfig {
 
     @Bean
     public DataSource dataSource() {
-        DriverManagerDataSource source = new DriverManagerDataSource();
-        source.setDriverClassName("org.h2.Driver");
-        source.setUrl("jdbc:h2:mem:testdb;create=true");
-        source.setUsername("sa");
-        source.setPassword("");
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
                 .addScript("file:src/main/resources/createDB.sql")
@@ -76,5 +72,10 @@ public class AppConfig {
         return properties;
     }
 
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource)
+    {
+        return new JdbcTemplate(dataSource);
+    }
 
 }

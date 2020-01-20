@@ -54,7 +54,6 @@ public class Employee implements Serializable {
     private Unit unit;
 
     public Employee() {
-        //constructor
     }
 
 

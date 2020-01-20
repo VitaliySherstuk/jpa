@@ -5,7 +5,13 @@ CREATE TABLE employee(
     external_employee     boolean,
     age   int,
     sex    char,
-    employee_status  ENUM('STUDENT', 'PRODUCTION', 'PREPRODUCTION', 'NONPRODUCTION') DEFAULT 'PRODUCTION',
+    employee_status  varchar,
+    country varchar,
+    state varchar,
+    city varchar,
+    street varchar,
+    house varchar,
+    flat varchar,
     PRIMARY KEY (id)
 );
 

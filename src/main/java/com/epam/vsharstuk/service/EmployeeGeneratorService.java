@@ -1,7 +1,9 @@
 package com.epam.vsharstuk.service;
 
+import com.epam.vsharstuk.model.Address;
 import com.epam.vsharstuk.model.Employee;
 import com.epam.vsharstuk.model.EmployeePersonalInfo;
+import com.epam.vsharstuk.model.EmployeeStatus;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,8 @@ public class EmployeeGeneratorService implements ApplicationContextAware {
         employee.setExternal(RANDOM.nextBoolean());
         employee.setSex(generateSex());
         employee.setAge(RANDOM.nextInt(100));
+        employee.setEmployeeStatus(generateEmployeeStatus());
+        employee.setAddress(getAddress());
         return employee;
     }
 
@@ -53,4 +57,28 @@ public class EmployeeGeneratorService implements ApplicationContextAware {
         return employeePersonalInfo;
     }
 
+    private EmployeeStatus generateEmployeeStatus() {
+        int number = RANDOM.nextInt(3);
+        switch (number) {
+            case 0:
+                return EmployeeStatus.STUDENT;
+            case 1:
+                return EmployeeStatus.PRODUCTION;
+            case 2:
+                return EmployeeStatus.PREPRODUCTION;
+            case 3:
+                return EmployeeStatus.NONPRODUCTION;
+        }
+        return EmployeeStatus.STUDENT;
+    }
+
+    private Address getAddress() {
+        Address address = new Address();
+        address.setCountry("Belarus");
+        address.setCity("Minsk");
+        address.setStreet("Nezavisimosti");
+        address.setHouse(186);
+        address.setFlat(308);
+        return address;
+    }
 }

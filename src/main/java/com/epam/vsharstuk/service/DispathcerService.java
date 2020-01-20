@@ -11,7 +11,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class DispathcerService {
@@ -42,33 +46,33 @@ public class DispathcerService {
 
     public void run() {
         initializeTables();
-        showEmployeeApi();
-        showUnitApi();
-        showProjectApi();
+        showEmployee();
+        showUnit();
+        showProject();
     }
 
     private void initializeTables() {
-        addToEmployeeTableNextQtyEmployees(20);
-        addToProjectTableNextQtyUnits(10);
-        addToUnitTableNextQtyUnits(10);
+        addToEmployeeTable(20);
+        addToProjectTable(10);
+        addToUnitTable(10);
 
     }
 
-    private void addToUnitTableNextQtyUnits(int i) {
+    private void addToUnitTable(int i) {
         while (i > 0) {
             LOG.info(String.format("unit added &s", unitTable.createUnit(unitGeneratorService.createUnit())));
             i--;
         }
     }
 
-    private void addToProjectTableNextQtyUnits(int i) {
+    private void addToProjectTable(int i) {
         while (i > 0) {
             LOG.info(String.format("project added %s", projectTable.createProject(projectGeneratorService.createProject())));
             i--;
         }
     }
 
-    private void addToEmployeeTableNextQtyEmployees(int i) {
+    private void addToEmployeeTable(int i) {
         while (i > 0) {
             Employee employee = employeeGenerator.createEmployee();
             employeeTable.createEmployee(employee);
@@ -77,7 +81,7 @@ public class DispathcerService {
         }
     }
 
-    private void showEmployeeApi() {
+    private void showEmployee() {
         LOG.info(String.format("employee with id = %s deleted %s", 1, employeeTable.deleteEmployeeById(1)));
         Employee employeeId2 = employeeTable.findEmployeeById(2);
         employeeId2.setFirstName("JUST NAME");
@@ -89,7 +93,7 @@ public class DispathcerService {
                 employeeTable.assignEmployeeToProjectById(employeeId2, 4)));
     }
 
-    private void showUnitApi() {
+    private void showUnit() {
         LOG.info(String.format("unit with id = %s deleted %s", 1, unitTable.deleteUnitById(1)));
         updateUnitWithId("INTERNET OF THINGS", 2, 20, 3);
         updateUnitWithId("UpdatedUnit", 4, 19, 18);
@@ -107,7 +111,7 @@ public class DispathcerService {
         LOG.info(String.format(UNIT_WAS_UPDATED, unit, unitTable.updateUnitById(unitId, unit)));
     }
 
-    private void showProjectApi() {
+    private void showProject() {
         LOG.info(String.format("project with id = %s deleted %s", 1, projectTable.deleteProjectById(1)));
         updateProjectWithId("AUTOMOTIVE", 2, 10, 11);
         updateProjectWithId("AddedEmployeeToProjectByUpdated", 5, 12, 13);

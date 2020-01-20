@@ -30,7 +30,6 @@ public class EmployeePersonalInfo implements Serializable {
     private Employee employee;
 
     public EmployeePersonalInfo() {
-        //constructor
     }
 
     public long getId() {

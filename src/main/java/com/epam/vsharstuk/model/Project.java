@@ -25,7 +25,6 @@ public class Project implements Serializable {
     private Set<Employee> employeeSet = new HashSet<>();
 
     public Project() {
-        //constructor
     }
 
     public long getId() {
